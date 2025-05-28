@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Gadget Vibes</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #d4fc79, #96e6a1);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    header a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 400px;
+      background: white;
+      margin: 60px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .btn {
+      background-color: #333;
+      color: white;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+    <script>
+        var data = "{{msg}}";
+        if (data=="nouser"){
+            alert("User not found")
+        }
+        else if(data == "wrongpin"){
+            alert("Invalid Pin")
+        }
+    </script>
+
+  <header>
+    <div>Gadget Vibes</div>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/register1">Register</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Login</h2>
+    <form action="/login2" method="POST">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button class="btn" type="submit">Login</button>
+    </form>
+    <a href="/forgotpassword">Forgot Password</a>
+  </div>
+
+</body>
+</html>

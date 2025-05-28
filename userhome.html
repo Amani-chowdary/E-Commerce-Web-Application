@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Home - Gadget Vibes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    .content {
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+    
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card-body h3 {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .card-body p {
+      margin: 5px 0;
+      color: #777;
+    }
+
+    .card-body button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .card-body button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var data= "{{msg}}";
+    if (data == "p1"){
+      alert("New Product added to Cart")
+    }
+    else if (data == "p2"){
+      alert("Product Quantity Upadated")
+    }
+    else if (data == "noproductsincart"){
+      alert("No Products in Cart")
+    }
+  </script>
+
+
+  <header>
+    <h1>Welcome, {{username}} !</h1>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/cart/{{username}}">My Cart</a>
+      <a href="/orders/{{username}}">Orders</a>
+      <a href="/home">LogOut</a>
+    </nav>
+  </header>
+
+  <div class="content">
+    <!-- Card 1 -->
+    <div class="card">
+      <img src="{{url_for('static',filename='images/headphones.jpg')}}" alt="Head Phones">
+      <div class="card-body">
+        <h3>Head Phones</h3>
+        <p>Price: ₹2,500</p>
+        <form action="/addtocart1"method="POST">
+            <input type="hidden" name="username" value="{{username}}">
+            <input type="hidden" name="productid" value="101">
+            <input type="hidden" name="productname" value="Head Phones">
+            <input type="hidden" name="productprice" value="2500">
+            <button >Add to Cart</button>
+
+        </form>
+        <button onclick="pay('{{username}}',101,2500)" class="rzp-button">Buy Now</button>
+        
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <img src="{{url_for('static',filename='images/mobile.jpeg')}}" alt="Smart Phone">
+      <div class="card-body">
+        <h3>Smart Phone</h3>
+        <p>Price: ₹55,000</p>
+        <form action="/addtocart1"method="POST">
+            <input type="hidden" name="username" value="{{username}}">
+            <input type="hidden" name="productid" value="102">
+            <input type="hidden" name="productname" value="Smart Phone">
+            <input type="hidden" name="productprice" value="55000">
+            <button>Add to Cart</button>
+
+        </form>
+        <button onclick="pay('{{username}}',102,55000)" class="rzp-button">Buy Now</button>
+        
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <img src="{{url_for('static',filename='images/smartwatch.jpeg')}}" alt="Smart Watch">
+      <div class="card-body">
+        <h3>SmartWatch </h3>
+        <p>Price: ₹999</p>
+        <form action="/addtocart1"method="POST">
+            <input type="hidden" name="username" value="{{username}}">
+            <input type="hidden" name="productid" value="103">
+            <input type="hidden" name="productname" value="Smart Watch pro">
+            <input type="hidden" name="productprice" value="999">
+            <button>Add to Cart</button>
+
+        </form>
+        <button onclick="pay('{{username}}',103,999)" class="rzp-button">Buy Now</button>
+        
+      </div>
+    </div>
+  </div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  function pay(username,productid,amount){
+    var options = {
+      key : "rzp_test_L5vbk17ntFgLBg",
+      amount : parseInt(amount) * 100,
+      currency : "INR",
+      name : "E Commerce",
+      description : "Basic E commerce application",
+      image : "{{url_for('static',filename='images/logo.png')}}",
+      handler : function (response){
+        alert("Payment Success !");
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/success1";
+        form.innerHTML = `
+          <input type="hidden" name="username" value="${username}">
+          <input type="hidden" name="productid" value="${productid}">
+          <input type="hidden" name="productname" value="${productname}">
+          <input type="hidden" name="productprice" value="${productprice}">
+          <input type="hidden" name="quantity" value="1">
+        `;
+        document.body.appendChild(form);
+        form.submit();
+      },
+      prefill : {
+        contact : "+91 9030707634"
+      },
+      theme : {
+        color : "orange"
+      }
+    };
+   
+      var rzp = new Razorpay(options);
+
+      rzp.on('payment.failed',function(response){
+        alert("Payemnt Failed !");
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/failure";
+        form.innerHTML = `
+          <input type="hidden" name="username" value="${username}w">
+        `;
+        document.body.appendChild(form);
+        form.submit();
+      });
+      rzp.open();
+    }
+  
+</script>
+</body>
+</html>

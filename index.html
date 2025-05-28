@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gadget Vibes - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .products {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px 20px;
+      flex-wrap: wrap;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 15px 0 5px;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: #777;
+    }
+
+    .product-card .price {
+      font-size: 16px;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    #add-btn {
+      display: inline-block;
+      background-color: #ff7e5f;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .add-btn:hover {
+      background-color: #ff3e1f;
+    }
+  </style>
+</head>
+<body>
+    <script>
+    var data = "{{msg}}"
+    if (data == "accountcreated"){
+      alert("Account Created Successfully !\n\n Login Now !")
+    }
+  </script>
+
+  <header>
+    <div class="logo">Gadget Vibes</div>
+    <nav>
+      <a href="/login1">Login</a>
+      <a href="/register1">Register</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to Gadget Vibes</h1>
+    <p>Your one-stop shop for the trendiest electronics!</p>
+  </section>
+
+  <section class="products">
+    <div class="product-card">
+      <img src="{{url_for('static',filename='images/headphones.jpg')}}" alt="Headphones">
+      <h3>Head Phones </h3>
+      <p class="price">2,500</p>
+      <button id="add-btn" onclick="openalert()">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="{{url_for('static',filename='images/mobile.jpeg')}}" alt="Mobile" >
+      <h3>Smart Phone</h3>
+      <p class="price">55000</p>
+      <button id="add-btn" onclick="openalert()">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="{{url_for('static',filename='images/smartwatch.jpeg')}}" alt="Smartwatch">
+      <h3>Smartwatch Pro</h3>
+      <p class="price">999</p>
+      <button id="add-btn" onclick="openalert()">Add to Cart</button>
+    </div>
+  </section>
+        <script>
+          function openalert(){
+            alert("SignUp / LogIn")
+          }
+        </script>
+
+</body>
+</html>
